@@ -8,7 +8,7 @@ body {
     background-color: #f4f1ea;
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    /* Dejamos que el scroll vertical funcione de manera natural */
+   
     overflow-y: auto; 
     overflow-x: hidden;
 }
@@ -17,9 +17,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Empujamos todo hacia abajo para que la carta tenga espacio físico al salir */
+ 
     margin-top: 220px; 
-    /* Le damos bastante aire abajo para que al hacer zoom se pueda seguir bajando */
+
     padding-bottom: 150px; 
 }
 
@@ -32,7 +32,7 @@ body {
     transition: opacity 0.3s ease;
 }
 
-/* --- EL SOBRE --- */
+
 .sobre-wrapper {
     position: relative;
     width: 320px;
@@ -88,7 +88,7 @@ body {
     filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
 }
 
-/* --- LA CARTA / INVITACIÓN --- */
+
 .carta {
     position: absolute;
     bottom: 10px;
@@ -115,7 +115,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* --- BOTONES --- */
+
 .botones-accion {
     display: flex;
     flex-direction: column;
@@ -139,7 +139,7 @@ body {
 .btn-confirmar { background-color: #a48c71; }
 .btn-mapa { background-color: #4a4a4a; }
 
-/* --- CLASES DE ANIMACIÓN AL HACER CLIC --- */
+
 
 .sobre-wrapper.sobre-abierto {
     transform: translateY(60px); 
