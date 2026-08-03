@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f1ea;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    /* Dejamos que el scroll vertical funcione de manera natural */
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Empujamos todo hacia abajo para que la carta tenga espacio físico al salir */
+    margin-top: 220px; 
+    /* Le damos bastante aire abajo para que al hacer zoom se pueda seguir bajando */
+    padding-bottom: 150px; 
+}
+
+.instruccion {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #5a5a5a;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    transition: opacity 0.3s ease;
+}
+
+/* --- EL SOBRE --- */
+.sobre-wrapper {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.sobre-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.sobre-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0dcd3;
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.bolsillo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid #f8f6f0;
+    border-right: 160px solid #f8f6f0;
+    border-bottom: 110px solid #fdfcfa;
+    border-top: 110px solid transparent;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 3;
+    filter: drop-shadow(0 -2px 3px rgba(0,0,0,0.05));
+}
+
+.solapa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 120px solid #fdfcfa;
+    transform-origin: top;
+    transition: transform 0.6s ease, z-index 0.2s;
+    z-index: 4;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+}
+
+/* --- LA CARTA / INVITACIÓN --- */
+.carta {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, z-index 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.imagen-invitacion {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* --- BOTONES --- */
+.botones-accion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease 1s;
+}
+
+.btn {
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.btn-confirmar { background-color: #a48c71; }
+.btn-mapa { background-color: #4a4a4a; }
+
+/* --- CLASES DE ANIMACIÓN AL HACER CLIC --- */
+
+.sobre-wrapper.sobre-abierto {
+    transform: translateY(60px); 
+}
+
+.sobre-wrapper.sobre-abierto .solapa {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.sobre-wrapper.sobre-abierto .carta {
+    transform: translateY(-200px) scale(1);
+    z-index: 5;
+    height: auto;
+    padding-bottom: 25px; 
+}
+
+.sobre-wrapper.sobre-abierto .botones-accion {
+    opacity: 1;
+}
