@@ -1,3 +1,20 @@
+/* =============================================
+   CONFIGURACIÓN DE MARCA — tocar solo esto por cliente
+   ============================================= */
+:root {
+    --color-fondo: #f9f5ee;      /* papel marfil */
+    --color-tinta: #2f2b26;      /* texto principal */
+    --color-tinta-suave: #6b6459;
+    --color-oro: #a9834f;        /* acento dorado */
+    --color-oro-suave: #cbb185;
+    --color-salvia: #6f7a5e;     /* verde salvia, acento secundario */
+    --color-papel-carta: #fffdf9;
+    --color-sombra: rgba(47, 43, 38, 0.18);
+
+    --fuente-display: 'Cormorant Garamond', serif;
+    --fuente-cuerpo: 'Montserrat', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,44 +22,107 @@
 }
 
 body {
-    background-color: #f4f1ea;
-    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-fondo);
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(169, 131, 79, 0.06), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(111, 122, 94, 0.07), transparent 45%);
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-tinta);
     min-height: 100vh;
-   
-    overflow-y: auto; 
     overflow-x: hidden;
+    position: relative;
 }
 
+/* =============================================
+   PÉTALOS FLOTANTES (ambiente)
+   ============================================= */
+.petalos {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.petalo {
+    position: absolute;
+    top: -5%;
+    width: 10px;
+    height: 10px;
+    background: var(--color-oro-suave);
+    opacity: 0.55;
+    border-radius: 50% 0 50% 50%;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 0.6; }
+    100% {
+        transform: translateY(110vh) translateX(var(--deriva, 40px)) rotate(280deg);
+        opacity: 0;
+    }
+}
+
+/* =============================================
+   ENCABEZADO
+   ============================================= */
 .contenedor-principal {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
- 
-    margin-top: 220px; 
+    padding: 100px 20px 150px;
+}
 
-    padding-bottom: 150px; 
+.encabezado {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: aparecer 1.2s ease both;
+}
+
+.eyebrow {
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--color-oro);
+    margin-bottom: 14px;
 }
 
 .instruccion {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--fuente-display);
     font-style: italic;
-    color: #5a5a5a;
-    margin-bottom: 30px;
-    font-size: 1.2rem;
-    transition: opacity 0.3s ease;
+    font-weight: 500;
+    color: var(--color-tinta-suave);
+    font-size: 1.35rem;
+    transition: opacity 0.4s ease;
 }
 
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
+/* =============================================
+   SOBRE
+   ============================================= */
 .sobre-wrapper {
     position: relative;
     width: 320px;
     height: 220px;
     cursor: pointer;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: aparecer 1.2s ease 0.2s both;
 }
 
 .sobre-wrapper:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 }
 
 .sobre-fondo {
@@ -51,9 +131,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #e0dcd3;
-    border-radius: 5px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: linear-gradient(160deg, #efe7d8, #e2d7c1);
+    border-radius: 6px;
+    box-shadow: 0 18px 40px var(--color-sombra);
     z-index: 1;
 }
 
@@ -63,12 +143,12 @@ body {
     left: 0;
     width: 0;
     height: 0;
-    border-left: 160px solid #f8f6f0;
-    border-right: 160px solid #f8f6f0;
-    border-bottom: 110px solid #fdfcfa;
+    border-left: 160px solid var(--color-papel-carta);
+    border-right: 160px solid var(--color-papel-carta);
+    border-bottom: 110px solid #fffefb;
     border-top: 110px solid transparent;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
     z-index: 3;
     filter: drop-shadow(0 -2px 3px rgba(0,0,0,0.05));
 }
@@ -81,29 +161,57 @@ body {
     height: 0;
     border-left: 160px solid transparent;
     border-right: 160px solid transparent;
-    border-top: 120px solid #fdfcfa;
+    border-top: 120px solid #fffefb;
     transform-origin: top;
-    transition: transform 0.6s ease, z-index 0.2s;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1), z-index 0.2s;
     z-index: 4;
-    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.12));
 }
 
+/* Sello de cera dorado, elemento distintivo del sobre */
+.sello {
+    position: absolute;
+    top: 96px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--color-oro-suave), var(--color-oro) 70%, #8a6a3c 100%);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25), inset 0 1px 2px rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    z-index: 5;
+}
 
+.sello span {
+    font-family: var(--fuente-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #fdf6e8;
+    letter-spacing: 0.03em;
+}
+
+/* =============================================
+   CARTA
+   ============================================= */
 .carta {
     position: absolute;
     bottom: 10px;
     left: 10px;
     right: 10px;
     height: 200px;
-    background-color: #fff;
-    border-radius: 8px;
+    background-color: var(--color-papel-carta);
+    border-radius: 10px;
     z-index: 2;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, z-index 0.1s;
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, z-index 0.1s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 15px;
+    box-shadow: 0 4px 18px rgba(47, 43, 38, 0.12);
+    padding: 22px 18px;
 }
 
 .imagen-invitacion {
@@ -111,38 +219,199 @@ body {
     height: auto;
     max-height: 280px;
     object-fit: contain;
-    border-radius: 4px;
-    margin-bottom: 15px;
+    border-radius: 6px;
+    margin-bottom: 16px;
 }
 
+.divisor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--color-oro);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    position: relative;
+}
 
+.divisor::before,
+.divisor::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, transparent, var(--color-oro-suave));
+}
+
+.divisor::after {
+    background: linear-gradient(to left, transparent, var(--color-oro-suave));
+}
+
+.divisor span {
+    padding: 0 12px;
+}
+
+/* =============================================
+   BOTONES DE ACCIÓN
+   ============================================= */
 .botones-accion {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
+    max-width: 320px;
     opacity: 0;
-    transition: opacity 0.5s ease 1s;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease 1s, transform 0.6s ease 1s;
 }
 
 .btn {
     text-align: center;
-    padding: 10px;
-    border-radius: 25px;
+    padding: 12px;
+    border-radius: 30px;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.85rem;
     font-weight: 600;
     color: #fff;
-    letter-spacing: 1px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
 }
 
-.btn-confirmar { background-color: #a48c71; }
-.btn-mapa { background-color: #4a4a4a; }
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(47, 43, 38, 0.2);
+    filter: brightness(1.05);
+}
 
+.btn:active {
+    transform: translateY(0);
+}
 
+.btn-confirmar { background-color: var(--color-oro); }
+.btn-mapa { background-color: var(--color-salvia); }
 
+/* =============================================
+   LISTA DE INVITADOS
+   ============================================= */
+.lista-invitados {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid #e9e2d3;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease 1.2s, transform 0.6s ease 1.2s;
+}
+
+.lista-titulo {
+    font-family: var(--fuente-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-tinta);
+    margin-bottom: 4px;
+}
+
+.lista-subtitulo {
+    font-size: 0.75rem;
+    color: var(--color-tinta-suave);
+    margin-bottom: 14px;
+}
+
+.lista-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-nombre {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid #ddd2b8;
+    border-radius: 25px;
+    background-color: #fffdf9;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.85rem;
+    color: var(--color-tinta);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input-nombre::placeholder {
+    color: #a99f8c;
+}
+
+.input-nombre:focus {
+    border-color: var(--color-oro);
+    box-shadow: 0 0 0 3px rgba(169, 131, 79, 0.15);
+}
+
+.btn-whatsapp-lista {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px;
+    border: none;
+    border-radius: 30px;
+    background-color: #3fa96e;
+    color: #fff;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn-whatsapp-lista:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(47, 43, 38, 0.2);
+    filter: brightness(1.05);
+}
+
+.btn-whatsapp-lista:active {
+    transform: translateY(0);
+}
+
+.icono-whatsapp {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+    flex-shrink: 0;
+}
+
+.lista-nota {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    color: var(--color-salvia);
+    min-height: 14px;
+    transition: opacity 0.3s ease;
+}
+
+.lista-nota.error {
+    color: #b5563f;
+}
+
+.input-nombre.input-error {
+    border-color: #b5563f;
+    animation: sacudir 0.4s ease;
+}
+
+@keyframes sacudir {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* =============================================
+   ESTADO ABIERTO
+   ============================================= */
 .sobre-wrapper.sobre-abierto {
-    transform: translateY(60px); 
+    transform: translateY(60px);
 }
 
 .sobre-wrapper.sobre-abierto .solapa {
@@ -150,13 +419,54 @@ body {
     z-index: 1;
 }
 
-.sobre-wrapper.sobre-abierto .carta {
-    transform: translateY(-200px) scale(1);
-    z-index: 5;
-    height: auto;
-    padding-bottom: 25px; 
+.sobre-wrapper.sobre-abierto .sello {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
 }
 
-.sobre-wrapper.sobre-abierto .botones-accion {
+.sobre-wrapper.sobre-abierto .carta {
+    transform: translateY(-210px) scale(1);
+    z-index: 5;
+    height: auto;
+    padding-bottom: 26px;
+}
+
+.sobre-wrapper.sobre-abierto .botones-accion,
+.sobre-wrapper.sobre-abierto .lista-invitados {
     opacity: 1;
+    transform: translateY(0);
+}
+
+/* =============================================
+   ACCESIBILIDAD Y RESPONSIVE
+   ============================================= */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--color-oro);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .sobre-wrapper {
+        width: 280px;
+        height: 200px;
+    }
+
+    .bolsillo {
+        border-left-width: 140px;
+        border-right-width: 140px;
+    }
+
+    .solapa {
+        border-left-width: 140px;
+        border-right-width: 140px;
+    }
 }
