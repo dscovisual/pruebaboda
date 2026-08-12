@@ -120,6 +120,16 @@ body {
 }
 
 /* =============================================
+   CAJA GENERAL (sobre + carta en flujo normal)
+   ============================================= */
+.invitacion-caja {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* =============================================
    SOBRE
    ============================================= */
 .sobre-wrapper {
@@ -127,8 +137,14 @@ body {
     width: 320px;
     height: 220px;
     cursor: pointer;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+    perspective: 700px;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), margin-bottom 0.5s ease;
     animation: aparecer 1.2s ease 0.2s both;
+}
+
+.invitacion-caja.abierta .sobre-wrapper {
+    margin-bottom: -70px;
 }
 
 .sobre-wrapper:hover {
@@ -205,24 +221,43 @@ body {
 }
 
 /* =============================================
-   CARTA
+   CARTA — vive en el flujo normal de la página,
+   así el documento crece solo y el scroll
+   siempre funciona, sin importar el contenido.
    ============================================= */
+.carta-contenedor {
+    width: 100%;
+    max-width: 300px;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+    z-index: 5;
+    position: relative;
+}
+
+.invitacion-caja.abierta .carta-contenedor {
+    grid-template-rows: 1fr;
+}
+
 .carta {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    height: 200px;
+    min-height: 0;
     overflow: hidden;
     background-color: var(--color-papel-carta);
     border-radius: 10px;
-    z-index: 2;
-    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, height 0s linear 0.3s, overflow 0s linear 0.3s, z-index 0.1s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 18px rgba(47, 43, 38, 0.12);
-    padding: 22px 18px;
+    box-shadow: 0 10px 30px rgba(47, 43, 38, 0.18);
+    padding: 0 18px;
+    opacity: 0;
+    transform: translateY(-14px);
+    transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s, padding 0.3s ease 0.35s;
+}
+
+.invitacion-caja.abierta .carta {
+    opacity: 1;
+    transform: translateY(0);
+    padding: 22px 18px 26px;
 }
 
 .imagen-invitacion {
@@ -270,9 +305,7 @@ body {
     gap: 12px;
     width: 100%;
     max-width: 320px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease 1s, transform 0.6s ease 1s;
+    margin-top: 16px;
 }
 
 .btn {
@@ -312,9 +345,6 @@ body {
     padding-top: 22px;
     border-top: 1px solid #e9e2d3;
     text-align: center;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease 1.2s, transform 0.6s ease 1.2s;
 }
 
 .lista-titulo {
@@ -421,10 +451,6 @@ body {
 /* =============================================
    ESTADO ABIERTO
    ============================================= */
-.sobre-wrapper.sobre-abierto {
-    transform: translateY(60px);
-}
-
 .sobre-wrapper.sobre-abierto .solapa {
     transform: rotateX(180deg);
     z-index: 1;
@@ -433,21 +459,6 @@ body {
 .sobre-wrapper.sobre-abierto .sello {
     opacity: 0;
     transform: translateX(-50%) scale(0.6);
-}
-
-.sobre-wrapper.sobre-abierto .carta {
-    transform: translateY(-210px) scale(1);
-    z-index: 5;
-    height: auto;
-    overflow: visible;
-    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), height 0s linear, overflow 0s linear, z-index 0.1s;
-    padding-bottom: 26px;
-}
-
-.sobre-wrapper.sobre-abierto .botones-accion,
-.sobre-wrapper.sobre-abierto .lista-invitados {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* =============================================
