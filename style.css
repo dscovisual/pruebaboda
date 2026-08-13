@@ -1,13 +1,10 @@
-/* =============================================
-   CONFIGURACIÓN DE MARCA — tocar solo esto por cliente
-   ============================================= */
 :root {
-    --color-fondo: #f9f5ee;      /* papel marfil */
-    --color-tinta: #2f2b26;      /* texto principal */
+    --color-fondo: #f9f5ee;
+    --color-tinta: #2f2b26;
     --color-tinta-suave: #6b6459;
-    --color-oro: #a9834f;        /* acento dorado */
+    --color-oro: #a9834f;
     --color-oro-suave: #cbb185;
-    --color-salvia: #6f7a5e;     /* verde salvia, acento secundario */
+    --color-salvia: #6f7a5e;
     --color-papel-carta: #fffdf9;
     --color-sombra: rgba(47, 43, 38, 0.18);
 
@@ -43,9 +40,6 @@ body {
     position: relative;
 }
 
-/* =============================================
-   PÉTALOS FLOTANTES (ambiente)
-   ============================================= */
 .petalos {
     position: fixed;
     inset: 0;
@@ -77,9 +71,6 @@ body {
     }
 }
 
-/* =============================================
-   ENCABEZADO
-   ============================================= */
 .contenedor-principal {
     position: relative;
     z-index: 1;
@@ -119,9 +110,6 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =============================================
-   CAJA GENERAL (sobre + carta en flujo normal)
-   ============================================= */
 .invitacion-caja {
     display: flex;
     flex-direction: column;
@@ -129,9 +117,6 @@ body {
     width: 100%;
 }
 
-/* =============================================
-   SOBRE
-   ============================================= */
 .sobre-wrapper {
     position: relative;
     width: 320px;
@@ -194,7 +179,6 @@ body {
     filter: drop-shadow(0 4px 5px rgba(0,0,0,0.12));
 }
 
-/* Sello de cera dorado, elemento distintivo del sobre */
 .sello {
     position: absolute;
     top: 96px;
@@ -220,11 +204,6 @@ body {
     letter-spacing: 0.03em;
 }
 
-/* =============================================
-   CARTA — vive en el flujo normal de la página,
-   así el documento crece solo y el scroll
-   siempre funciona, sin importar el contenido.
-   ============================================= */
 .carta-contenedor {
     width: 100%;
     max-width: 300px;
@@ -296,9 +275,6 @@ body {
     padding: 0 12px;
 }
 
-/* =============================================
-   BOTONES DE ACCIÓN
-   ============================================= */
 .botones-accion {
     display: flex;
     flex-direction: column;
@@ -335,9 +311,6 @@ body {
 .btn-confirmar { background-color: var(--color-oro); }
 .btn-mapa { background-color: var(--color-salvia); }
 
-/* =============================================
-   LISTA DE INVITADOS
-   ============================================= */
 .lista-invitados {
     width: 100%;
     max-width: 320px;
@@ -448,9 +421,6 @@ body {
     75% { transform: translateX(4px); }
 }
 
-/* =============================================
-   ESTADO ABIERTO
-   ============================================= */
 .sobre-wrapper.sobre-abierto .solapa {
     transform: rotateX(180deg);
     z-index: 1;
@@ -461,9 +431,6 @@ body {
     transform: translateX(-50%) scale(0.6);
 }
 
-/* =============================================
-   ACCESIBILIDAD Y RESPONSIVE
-   ============================================= */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -492,5 +459,148 @@ input:focus-visible {
     .solapa {
         border-left-width: 140px;
         border-right-width: 140px;
+    }
+}
+
+.contador-evento {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.contador-titulo {
+    font-family: var(--fuente-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--color-tinta-suave);
+    margin-bottom: 12px;
+}
+
+.contador-grilla {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contador-bloque {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: linear-gradient(160deg, #fbf7ee, #f1e8d5);
+    box-shadow: inset 0 0 0 1px #e9dcc0;
+}
+
+.contador-numero {
+    font-family: var(--fuente-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-oro);
+    line-height: 1;
+}
+
+.contador-etiqueta {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-tinta-suave);
+    margin-top: 4px;
+}
+
+.detalle-evento {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 6px;
+}
+
+.detalle-etiqueta {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-oro);
+    margin-bottom: 4px;
+}
+
+.detalle-valor {
+    font-family: var(--fuente-display);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-tinta);
+}
+
+.detalle-sub {
+    font-size: 0.78rem;
+    color: var(--color-tinta-suave);
+    margin-top: 2px;
+}
+
+.btn-musica {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--color-oro-suave);
+    background-color: var(--color-papel-carta);
+    box-shadow: 0 6px 16px rgba(47, 43, 38, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-musica:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(47, 43, 38, 0.2);
+}
+
+.icono-musica {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: var(--color-oro);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+}
+
+.btn-musica.sonando .icono-musica {
+    stroke: var(--color-salvia);
+}
+
+.btn-musica.sonando {
+    animation: pulso-suave 1.8s ease-in-out infinite;
+}
+
+@keyframes pulso-suave {
+    0%, 100% { box-shadow: 0 6px 16px rgba(47, 43, 38, 0.15); }
+    50% { box-shadow: 0 6px 20px rgba(111, 122, 94, 0.35); }
+}
+
+@media (max-width: 380px) {
+    .btn-musica {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .contador-bloque {
+        width: 50px;
+        padding: 8px 0;
+    }
+
+    .contador-numero {
+        font-size: 1.35rem;
     }
 }
